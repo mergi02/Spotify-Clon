@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include "SignUp1.h"
 #include "test.h"
 
 using namespace System;
@@ -8,6 +7,7 @@ using namespace System::ComponentModel;
 using namespace System::Collections;
 using namespace System::Windows::Forms;
 using namespace System::Data;
+using namespace System::Drawing;
 using namespace ComponentFactory::Krypton::Toolkit;
 
 namespace SpotifyApp {
@@ -15,7 +15,7 @@ namespace SpotifyApp {
 	/// <summary>
 	/// Summary for MyForm
 	/// </summary>
-	public ref class MyForm : public KryptonForm
+    public ref class MyForm : public KryptonForm
 	{
 	public:
 		MyForm(void)
@@ -56,6 +56,7 @@ namespace SpotifyApp {
 
 
 
+
     protected:
 
 
@@ -76,7 +77,6 @@ namespace SpotifyApp {
 		void InitializeComponent(void)
 		{
             this->components = (gcnew System::ComponentModel::Container());
-            System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
             this->kryptonPalette1 = (gcnew ComponentFactory::Krypton::Toolkit::KryptonPalette(this->components));
             this->label1 = (gcnew System::Windows::Forms::Label());
             this->label2 = (gcnew System::Windows::Forms::Label());
@@ -93,18 +93,6 @@ namespace SpotifyApp {
             // 
             // kryptonPalette1
             // 
-            this->kryptonPalette1->ButtonSpecs->FormClose->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"kryptonPalette1.ButtonSpecs.FormClose.Image")));
-            this->kryptonPalette1->ButtonSpecs->FormClose->ImageStates->ImagePressed = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"kryptonPalette1.ButtonSpecs.FormClose.ImageStates.ImagePressed")));
-            this->kryptonPalette1->ButtonSpecs->FormClose->ImageStates->ImageTracking = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"kryptonPalette1.ButtonSpecs.FormClose.ImageStates.ImageTracking")));
-            this->kryptonPalette1->ButtonSpecs->FormMax->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"kryptonPalette1.ButtonSpecs.FormMax.Image")));
-            this->kryptonPalette1->ButtonSpecs->FormMax->ImageStates->ImagePressed = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"kryptonPalette1.ButtonSpecs.FormMax.ImageStates.ImagePressed")));
-            this->kryptonPalette1->ButtonSpecs->FormMax->ImageStates->ImageTracking = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"kryptonPalette1.ButtonSpecs.FormMax.ImageStates.ImageTracking")));
-            this->kryptonPalette1->ButtonSpecs->FormMin->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"kryptonPalette1.ButtonSpecs.FormMin.Image")));
-            this->kryptonPalette1->ButtonSpecs->FormMin->ImageStates->ImagePressed = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"kryptonPalette1.ButtonSpecs.FormMin.ImageStates.ImagePressed")));
-            this->kryptonPalette1->ButtonSpecs->FormMin->ImageStates->ImageTracking = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"kryptonPalette1.ButtonSpecs.FormMin.ImageStates.ImageTracking")));
-            this->kryptonPalette1->ButtonSpecs->FormRestore->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"kryptonPalette1.ButtonSpecs.FormRestore.Image")));
-            this->kryptonPalette1->ButtonSpecs->FormRestore->ImageStates->ImagePressed = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"kryptonPalette1.ButtonSpecs.FormRestore.ImageStates.ImagePressed")));
-            this->kryptonPalette1->ButtonSpecs->FormRestore->ImageStates->ImageTracking = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"kryptonPalette1.ButtonSpecs.FormRestore.ImageStates.ImageTracking")));
             this->kryptonPalette1->ButtonStyles->ButtonForm->StateNormal->Back->Color1 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)),
                 static_cast<System::Int32>(static_cast<System::Byte>(215)), static_cast<System::Int32>(static_cast<System::Byte>(94)));
             this->kryptonPalette1->ButtonStyles->ButtonForm->StateNormal->Back->Color2 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)),
@@ -362,9 +350,7 @@ namespace SpotifyApp {
             // 
             // random
             // 
-            this->random->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"random.BackgroundImage")));
             this->random->Enabled = false;
-            this->random->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"random.Image")));
             this->random->Location = System::Drawing::Point(315, 70);
             this->random->Margin = System::Windows::Forms::Padding(0, 0, 20, 0);
             this->random->Name = L"random";
@@ -372,6 +358,7 @@ namespace SpotifyApp {
             this->random->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
             this->random->TabIndex = 8;
             this->random->TabStop = false;
+            this->random->Click += gcnew System::EventHandler(this, &MyForm::random_Click);
             // 
             // label4
             // 
@@ -456,6 +443,7 @@ namespace SpotifyApp {
             this->StateCommon->Header->Content->ShortText->Font = (gcnew System::Drawing::Font(L"Century Gothic", 8.25F, System::Drawing::FontStyle::Regular,
                 System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
             this->TransparencyKey = System::Drawing::Color::Cyan;
+            this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
             (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->random))->EndInit();
             this->ResumeLayout(false);
             this->PerformLayout();
@@ -484,6 +472,10 @@ private: System::Void signInBtn_Click(System::Object^ sender, System::EventArgs^
     else{
         MessageBox::Show("Datos incorrectos.", "Error!",MessageBoxButtons::OK);
     }
+}
+private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void random_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 }
 
