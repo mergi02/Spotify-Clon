@@ -1,7 +1,6 @@
 ﻿#pragma once
-#include "SignUp1.h"
 #include "test.h"
-
+#include "dashboard.h"
 using namespace System;
 System::Windows::Forms::Form;
 using namespace System::ComponentModel;
@@ -17,13 +16,11 @@ namespace SpotifyApp {
 	/// </summary>
 	public ref class MyForm : public KryptonForm
 	{
+    
 	public:
 		MyForm(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
 		}
 
 
@@ -179,7 +176,7 @@ namespace SpotifyApp {
             // 
             // usernameTxt
             // 
-            this->usernameTxt->Location = System::Drawing::Point(50, 210);
+            this->usernameTxt->Location = System::Drawing::Point(85, 195);
             this->usernameTxt->Name = L"usernameTxt";
             this->usernameTxt->PaletteMode = ComponentFactory::Krypton::Toolkit::PaletteMode::ProfessionalSystem;
             this->usernameTxt->ShortcutsEnabled = false;
@@ -215,7 +212,7 @@ namespace SpotifyApp {
             // 
             // passwordTxt
             // 
-            this->passwordTxt->Location = System::Drawing::Point(50, 255);
+            this->passwordTxt->Location = System::Drawing::Point(85, 240);
             this->passwordTxt->Name = L"passwordTxt";
             this->passwordTxt->PasswordChar = '●';
             this->passwordTxt->ShortcutsEnabled = false;
@@ -246,7 +243,7 @@ namespace SpotifyApp {
             // 
             // signInBtn
             // 
-            this->signInBtn->Location = System::Drawing::Point(50, 301);
+            this->signInBtn->Location = System::Drawing::Point(85, 286);
             this->signInBtn->Name = L"signInBtn";
             this->signInBtn->OverrideDefault->Border->Color1 = System::Drawing::Color::White;
             this->signInBtn->OverrideDefault->Border->Color2 = System::Drawing::Color::White;
@@ -258,7 +255,7 @@ namespace SpotifyApp {
             this->signInBtn->OverrideDefault->Border->Rounding = 20;
             this->signInBtn->OverrideDefault->Border->Width = 1;
             this->signInBtn->PaletteMode = ComponentFactory::Krypton::Toolkit::PaletteMode::ProfessionalSystem;
-            this->signInBtn->Size = System::Drawing::Size(112, 43);
+            this->signInBtn->Size = System::Drawing::Size(112, 48);
             this->signInBtn->StateCommon->Back->Color1 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)),
                 static_cast<System::Int32>(static_cast<System::Byte>(215)), static_cast<System::Int32>(static_cast<System::Byte>(96)));
             this->signInBtn->StateCommon->Back->Color2 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(29)),
@@ -304,7 +301,7 @@ namespace SpotifyApp {
             // 
             // signUpBtn
             // 
-            this->signUpBtn->Location = System::Drawing::Point(168, 301);
+            this->signUpBtn->Location = System::Drawing::Point(203, 286);
             this->signUpBtn->Name = L"signUpBtn";
             this->signUpBtn->OverrideDefault->Border->Color1 = System::Drawing::Color::White;
             this->signUpBtn->OverrideDefault->Border->Color2 = System::Drawing::Color::White;
@@ -316,7 +313,7 @@ namespace SpotifyApp {
             this->signUpBtn->OverrideDefault->Border->Rounding = 20;
             this->signUpBtn->OverrideDefault->Border->Width = 1;
             this->signUpBtn->PaletteMode = ComponentFactory::Krypton::Toolkit::PaletteMode::ProfessionalSystem;
-            this->signUpBtn->Size = System::Drawing::Size(106, 43);
+            this->signUpBtn->Size = System::Drawing::Size(106, 48);
             this->signUpBtn->StateCommon->Back->Color1 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(40)),
                 static_cast<System::Int32>(static_cast<System::Byte>(65)), static_cast<System::Int32>(static_cast<System::Byte>(171)));
             this->signUpBtn->StateCommon->Back->Color2 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(40)),
@@ -363,12 +360,14 @@ namespace SpotifyApp {
             // random
             // 
             this->random->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"random.BackgroundImage")));
+            this->random->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
+            this->random->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
             this->random->Enabled = false;
             this->random->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"random.Image")));
-            this->random->Location = System::Drawing::Point(315, 70);
+            this->random->Location = System::Drawing::Point(389, 56);
             this->random->Margin = System::Windows::Forms::Padding(0, 0, 20, 0);
             this->random->Name = L"random";
-            this->random->Size = System::Drawing::Size(490, 304);
+            this->random->Size = System::Drawing::Size(373, 328);
             this->random->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
             this->random->TabIndex = 8;
             this->random->TabStop = false;
@@ -380,7 +379,7 @@ namespace SpotifyApp {
                 static_cast<System::Byte>(0)));
             this->label4->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(215)),
                 static_cast<System::Int32>(static_cast<System::Byte>(96)));
-            this->label4->Location = System::Drawing::Point(67, 161);
+            this->label4->Location = System::Drawing::Point(102, 146);
             this->label4->Name = L"label4";
             this->label4->Size = System::Drawing::Size(191, 32);
             this->label4->TabIndex = 3;
@@ -395,7 +394,7 @@ namespace SpotifyApp {
                 System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
             this->label5->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(215)),
                 static_cast<System::Int32>(static_cast<System::Byte>(96)));
-            this->label5->Location = System::Drawing::Point(78, 103);
+            this->label5->Location = System::Drawing::Point(113, 88);
             this->label5->Name = L"label5";
             this->label5->Size = System::Drawing::Size(180, 58);
             this->label5->TabIndex = 11;
@@ -476,14 +475,21 @@ private: System::Void signUpBtn_Click(System::Object^ sender, System::EventArgs^
    
 
 }
+
 private: System::Void signInBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+   
+    bool showWindownForm = false;
+    dashboard^ dsb = gcnew dashboard();
+ 
     if (usernameTxt->Text == "intento" && passwordTxt->Text=="1234")
     {
-        Application::Exit();
+        this->Hide();
+        dsb->Show();
     }
     else{
         MessageBox::Show("Datos incorrectos.", "Error!",MessageBoxButtons::OK);
     }
+
 }
 }
 

@@ -38,7 +38,7 @@ namespace SpotifyApp {
 			}
 		}
 
-	private: System::Windows::Forms::PictureBox^ pictureBox1;
+
 	private: ComponentFactory::Krypton::Toolkit::KryptonPalette^ kryptonPalette1;
 	private: System::Windows::Forms::Label^ label2;
 
@@ -51,6 +51,9 @@ namespace SpotifyApp {
 	private: ComponentFactory::Krypton::Toolkit::KryptonTextBox^ nameTxt;
 	private: ComponentFactory::Krypton::Toolkit::KryptonButton^ signUpBtn;
 	private: System::Windows::Forms::Label^ label3;
+
+	private: System::Windows::Forms::PictureBox^ pictureBox1;
+	private: System::Windows::Forms::Label^ label1;
 
 
 
@@ -84,7 +87,6 @@ namespace SpotifyApp {
 		{
 			this->components = (gcnew System::ComponentModel::Container());
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(test::typeid));
-			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->kryptonPalette1 = (gcnew ComponentFactory::Krypton::Toolkit::KryptonPalette(this->components));
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->userTxt = (gcnew ComponentFactory::Krypton::Toolkit::KryptonTextBox());
@@ -93,19 +95,10 @@ namespace SpotifyApp {
 			this->nameTxt = (gcnew ComponentFactory::Krypton::Toolkit::KryptonTextBox());
 			this->signUpBtn = (gcnew ComponentFactory::Krypton::Toolkit::KryptonButton());
 			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->label1 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
-			// 
-			// pictureBox1
-			// 
-			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(12, 12);
-			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(440, 433);
-			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
-			this->pictureBox1->TabIndex = 1;
-			this->pictureBox1->TabStop = false;
-			this->pictureBox1->Click += gcnew System::EventHandler(this, &test::pictureBox1_Click);
 			// 
 			// kryptonPalette1
 			// 
@@ -185,9 +178,9 @@ namespace SpotifyApp {
 			// 
 			// userTxt
 			// 
-			this->userTxt->Location = System::Drawing::Point(572, 167);
+			this->userTxt->Location = System::Drawing::Point(560, 167);
 			this->userTxt->Name = L"userTxt";
-			this->userTxt->Size = System::Drawing::Size(219, 25);
+			this->userTxt->Size = System::Drawing::Size(231, 25);
 			this->userTxt->StateCommon->Back->Color1 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(53)),
 				static_cast<System::Int32>(static_cast<System::Byte>(34)), static_cast<System::Int32>(static_cast<System::Byte>(210)));
 			this->userTxt->StateCommon->Border->Color1 = System::Drawing::Color::White;
@@ -202,9 +195,9 @@ namespace SpotifyApp {
 			// 
 			// emailTxt
 			// 
-			this->emailTxt->Location = System::Drawing::Point(572, 301);
+			this->emailTxt->Location = System::Drawing::Point(560, 301);
 			this->emailTxt->Name = L"emailTxt";
-			this->emailTxt->Size = System::Drawing::Size(219, 25);
+			this->emailTxt->Size = System::Drawing::Size(231, 25);
 			this->emailTxt->StateCommon->Back->Color1 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(53)),
 				static_cast<System::Int32>(static_cast<System::Byte>(34)), static_cast<System::Int32>(static_cast<System::Byte>(210)));
 			this->emailTxt->StateCommon->Border->Color1 = System::Drawing::Color::White;
@@ -218,12 +211,12 @@ namespace SpotifyApp {
 			// 
 			// passTxt
 			// 
-			this->passTxt->Location = System::Drawing::Point(572, 259);
+			this->passTxt->Location = System::Drawing::Point(560, 259);
 			this->passTxt->Name = L"passTxt";
 			this->passTxt->Palette = this->kryptonPalette1;
 			this->passTxt->PaletteMode = ComponentFactory::Krypton::Toolkit::PaletteMode::Custom;
 			this->passTxt->PasswordChar = '●';
-			this->passTxt->Size = System::Drawing::Size(219, 25);
+			this->passTxt->Size = System::Drawing::Size(231, 25);
 			this->passTxt->StateCommon->Back->Color1 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(53)),
 				static_cast<System::Int32>(static_cast<System::Byte>(34)), static_cast<System::Int32>(static_cast<System::Byte>(210)));
 			this->passTxt->StateCommon->Border->Color1 = System::Drawing::Color::White;
@@ -238,9 +231,9 @@ namespace SpotifyApp {
 			// 
 			// nameTxt
 			// 
-			this->nameTxt->Location = System::Drawing::Point(572, 213);
+			this->nameTxt->Location = System::Drawing::Point(560, 213);
 			this->nameTxt->Name = L"nameTxt";
-			this->nameTxt->Size = System::Drawing::Size(219, 25);
+			this->nameTxt->Size = System::Drawing::Size(231, 25);
 			this->nameTxt->StateCommon->Back->Color1 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(53)),
 				static_cast<System::Int32>(static_cast<System::Byte>(34)), static_cast<System::Int32>(static_cast<System::Byte>(210)));
 			this->nameTxt->StateCommon->Border->Color1 = System::Drawing::Color::White;
@@ -292,6 +285,32 @@ namespace SpotifyApp {
 			this->label3->Text = L"play any song, anytime, free.\r\n\r\n";
 			this->label3->TextAlign = System::Drawing::ContentAlignment::BottomLeft;
 			// 
+			// pictureBox1
+			// 
+			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
+			this->pictureBox1->Location = System::Drawing::Point(12, -1);
+			this->pictureBox1->Name = L"pictureBox1";
+			this->pictureBox1->Size = System::Drawing::Size(479, 433);
+			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
+			this->pictureBox1->TabIndex = 12;
+			this->pictureBox1->TabStop = false;
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(53)), static_cast<System::Int32>(static_cast<System::Byte>(34)),
+				static_cast<System::Int32>(static_cast<System::Byte>(210)));
+			this->label1->Font = (gcnew System::Drawing::Font(L"Century Gothic", 12, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(192)),
+				static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->label1->Location = System::Drawing::Point(163, 394);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(149, 38);
+			this->label1->TabIndex = 13;
+			this->label1->Text = L"minding the gap.\r\n\r\n";
+			this->label1->TextAlign = System::Drawing::ContentAlignment::BottomLeft;
+			// 
 			// test
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -299,6 +318,8 @@ namespace SpotifyApp {
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(53)), static_cast<System::Int32>(static_cast<System::Byte>(34)),
 				static_cast<System::Int32>(static_cast<System::Byte>(210)));
 			this->ClientSize = System::Drawing::Size(834, 461);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->signUpBtn);
 			this->Controls->Add(this->nameTxt);
@@ -306,7 +327,6 @@ namespace SpotifyApp {
 			this->Controls->Add(this->emailTxt);
 			this->Controls->Add(this->userTxt);
 			this->Controls->Add(this->label2);
-			this->Controls->Add(this->pictureBox1);
 			this->ForeColor = System::Drawing::Color::White;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedToolWindow;
 			this->Name = L"test";
