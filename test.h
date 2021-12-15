@@ -10,7 +10,8 @@ namespace SpotifyApp {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace ComponentFactory::Krypton::Toolkit;
-
+#include "SpotifyUsuario.h"
+#include "Usuario.h"
 	/// <summary>
 	/// Summary for test
 	/// </summary>
@@ -356,10 +357,23 @@ namespace SpotifyApp {
 
 	}
 	private: System::Void signUpBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (userTxt->Text != "Username" && passTxt->Text != "Password" 
-			&& nameTxt->Text != "Complete Name" && emailTxt->Text != "E-mail")
+		SpotifyUsuario su;
+		Usuario u;
+		//using std::string; 
+		string user = u.username;
+		string name = u.name;
+		string pass = u.password;
+		string email = u.email;
+		String^ _user = gcnew String(user.c_str());
+		String^ _name = gcnew String(name.c_str());
+		String^ _pass = gcnew String(pass.c_str());
+		String^ _email = gcnew String(email.c_str());
+		if (userTxt->Text != _user && passTxt->Text != _pass  
+			&& nameTxt->Text != _name && emailTxt->Text != _email)
 		{
-			Application::Exit();
+			su.crearUsuario();
+			MyForm^ mf = gcnew MyForm();
+			mf->Show();
 		}
 		else {
 			MessageBox::Show("Faltan requisitos.", "Error", MessageBoxButtons::OK);

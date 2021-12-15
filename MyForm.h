@@ -8,41 +8,43 @@ using namespace System::Collections;
 using namespace System::Windows::Forms;
 using namespace System::Data;
 using namespace ComponentFactory::Krypton::Toolkit;
+#include "SpotifyUsuario.h"
+#include "Usuario.h"
 
 namespace SpotifyApp {
 
-	/// <summary>
-	/// Summary for MyForm
-	/// </summary>
-	public ref class MyForm : public KryptonForm
-	{
-    
-	public:
-		MyForm(void)
-		{
-			InitializeComponent();
-		}
+    /// <summary>
+    /// Summary for MyForm
+    /// </summary>
+    public ref class MyForm : public KryptonForm
+    {
+
+    public:
+        MyForm(void)
+        {
+            InitializeComponent();
+        }
 
 
-	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		~MyForm()
-		{
-			if (components)
-			{
-				delete components;
-			}
-		}
-	private: ComponentFactory::Krypton::Toolkit::KryptonPalette^ kryptonPalette1;
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Label^ label2;
+    protected:
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        ~MyForm()
+        {
+            if (components)
+            {
+                delete components;
+            }
+        }
+    private: ComponentFactory::Krypton::Toolkit::KryptonPalette^ kryptonPalette1;
+    private: System::Windows::Forms::Label^ label1;
+    private: System::Windows::Forms::Label^ label2;
     private: ComponentFactory::Krypton::Toolkit::KryptonTextBox^ usernameTxt;
     private: ComponentFactory::Krypton::Toolkit::KryptonTextBox^ passwordTxt;
 
 
-	private: System::Windows::Forms::Label^ label3;
+    private: System::Windows::Forms::Label^ label3;
     private: ComponentFactory::Krypton::Toolkit::KryptonButton^ signInBtn;
 
     private: ComponentFactory::Krypton::Toolkit::KryptonButton^ signUpBtn;
@@ -56,22 +58,22 @@ namespace SpotifyApp {
     protected:
 
 
-	protected:
-	private: System::ComponentModel::IContainer^ components;
+    protected:
+    private: System::ComponentModel::IContainer^ components;
 
-	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
+    private:
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
 
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		void InitializeComponent(void)
-		{
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        void InitializeComponent(void)
+        {
             this->components = (gcnew System::ComponentModel::Container());
             System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
             this->kryptonPalette1 = (gcnew ComponentFactory::Krypton::Toolkit::KryptonPalette(this->components));
@@ -462,39 +464,51 @@ namespace SpotifyApp {
         }
     private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
     }
-private: System::Void kryptonTextBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-   
-}
-private: System::Void kryptonPalette1_PalettePaint(System::Object^ sender, ComponentFactory::Krypton::Toolkit::PaletteLayoutEventArgs^ e) {
-}
-private: System::Void signUpBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-    this->Hide();
-    test^ sgn= gcnew test;
-    sgn->Show();
-  
-   
+    private: System::Void kryptonTextBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 
-}
-
-private: System::Void signInBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-   
-    bool showWindownForm = false;
-    dashboard^ dsb = gcnew dashboard();
- 
-    if (usernameTxt->Text == "intento" && passwordTxt->Text=="1234")
-    {
+    }
+    private: System::Void kryptonPalette1_PalettePaint(System::Object^ sender, ComponentFactory::Krypton::Toolkit::PaletteLayoutEventArgs^ e) {
+    }
+    private: System::Void signUpBtn_Click(System::Object^ sender, System::EventArgs^ e) {
         this->Hide();
-        dsb->Show();
-    }
-    else{
-        MessageBox::Show("Datos incorrectos.", "Error!",MessageBoxButtons::OK);
+        test^ sgn = gcnew test;
+        sgn->Show();
+
+
+
     }
 
-}
+    private: System::Void signInBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+
+        bool showWindownForm = false;
+        dashboard^ dsb = gcnew dashboard();
+        SpotifyUsuario su;
+        Usuario u;
+        //using std::string; 
+        string user = u.username;
+        string name = u.name;
+        string pass = u.password;
+        string email = u.email;
+        String^ _user = gcnew String(user.c_str());
+        String^ _name = gcnew String(name.c_str());
+        String^ _pass = gcnew String(pass.c_str());
+        String^ _email = gcnew String(email.c_str());
+        if (usernameTxt->Text == _user && passwordTxt->Text == _pass)
+        {
+
+            su.iniciarSesion();
+            dsb->Show();
+
+        }
+        else {
+            MessageBox::Show("Datos incorrectos.", "Error!", MessageBoxButtons::OK);
+        }
+
+    }
+
+    };
 }
 
 #pragma endregion
 	/*private: System::Void kryptonPalette2_PalettePaint(System::Object^ sender, ComponentFactory::Krypton::Toolkit::PaletteLayoutEventArgs^ e) {
 	}*/
-	;
-}
