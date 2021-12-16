@@ -11,6 +11,9 @@
 #include "listaGet.h"
 #include  <msclr/marshal_cppstd.h>
 #include "CatalogoCircular.h"
+#include <fstream>
+#include <sstream>
+#include <vector>
 using namespace msclr::interop;
 using std::vector; using std::cin;
 using namespace System;
@@ -457,6 +460,9 @@ namespace SpotifyApp {
 						break;
 					else
 						result = DataStr->Split(',');
+					if (count == 2)
+						break;
+					result = DataStr->Split('\'');
 
 					ComponentFactory::Krypton::Toolkit::KryptonDropButton^ drop = (gcnew ComponentFactory::Krypton::Toolkit::KryptonDropButton());
 
@@ -570,16 +576,17 @@ private: System::Void reproducirToolStripMenuItem_Click(System::Object^ sender, 
 
 }
 	private: System::Void list_Click(System::Object^ sender, System::EventArgs^ e) {
+	
 		repro++;
 		ComponentFactory::Krypton::Toolkit::KryptonButton^ testing = dynamic_cast<ComponentFactory::Krypton::Toolkit::KryptonButton^>(sender);
 
 		if (repro == 1)
 		{
-			std::string ID = msclr::interop::marshal_as<std::string>(getIDUrl());
-			std::string Artist = msclr::interop::marshal_as<std::string>(getArtist());
-			std::string SongName = msclr::interop::marshal_as<std::string>(getSong());
+			string ID = msclr::interop::marshal_as<std::string>(getIDUrl());
+			string Artist = msclr::interop::marshal_as<std::string>(getArtist());
+			string SongName = msclr::interop::marshal_as<std::string>(getSong());
 
-			std::string newS = msclr::interop::marshal_as<std::string>(testing->Text);
+			string newS = msclr::interop::marshal_as<std::string>(testing->Text);
 			
 			ofstream listaArchivo(newS + ".bin", ios::binary | ios::out | ios::app);
 			ofstream listaArchivoT(newS + ".txt", ios::app);
