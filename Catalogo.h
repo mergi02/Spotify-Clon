@@ -442,27 +442,71 @@ namespace SpotifyApp {
 
 			CatalogoCircular cl;
 			SeccionButtonLista btnLista;
-			System::String^ text = numBtn2->Text;
-			std::string newS = msclr::interop::marshal_as<std::string>(text);
-			int num = stoi(newS);
-			StreamReader^ DataIn = File::OpenText("C:/Users/Administrator/source/repos/Spotify/SpotifyApp/Resources/data.txt");
-			String^ DataStr;
+			ifstream archivoData("data.csv", ios::in);
+			string DataStr;
 			int count = 0;
-			array<String^>^ result;
+
+			array<String^> res;
+			String^ aux;
+			string auxiliar;
+			string valor;
+			int num = 50;
 			
 			for (int i = 0; i < num; i++)
 			{
-
-				while ((DataStr = DataIn->ReadLine()) != nullptr && count != num+1)
+				while (getline(archivoData, DataStr) && count != i+1)
 				{
+					stringstream ss(DataStr);
+					int pos = 0;
 					count++;
 					if (count == 1)
 						break;
 					else
-						result = DataStr->Split(',');
-					if (count == 2)
-						break;
-					result = DataStr->Split('\'');
+						aux = gcnew String(DataStr.c_str());
+					res = aux->Split(',');
+
+					if (DataStr.at(pos) == '\"' || DataStr.at(pos) == ']')
+					{ 
+
+					 if (DataStr.at(pos) == '\"')
+					 {
+						getline(ss, valor, '\"');
+						getline(ss, valor, '\"');
+
+						pos += valor.length() + 2 + 1;
+
+						getline(ss, auxiliar, ',');
+					 }
+					 else
+					 {
+						getline(ss, valor, ',');
+						pos += valor.length() + 1;
+					 }
+					 if (count==2)
+						 int posCaracAux = 1;
+						 string auxReader;
+						 stringstream ssAux(valor);
+
+					 section:
+						 getline(ssAux, auxReader, '\'');
+						 getline(ssAux, auxReader, '\'');
+						 res.push_back(auxReader);
+						 posCaracAux += auxReader.length() + 2;
+						 if (valor.at(posCaracAux) == ',')
+						 {
+							 getline(ssAux, auxReader, ',');
+							 posCaracAux += 2;
+							 goto section;
+						 }
+
+					}
+					else
+					{
+						getline(ss, valor, ',');
+
+						pos += valor.length() + 1;
+					}
+
 
 					ComponentFactory::Krypton::Toolkit::KryptonDropButton^ drop = (gcnew ComponentFactory::Krypton::Toolkit::KryptonDropButton());
 
@@ -520,21 +564,21 @@ namespace SpotifyApp {
 				
 					//bug: se abre la info de un elemento anterior y se abre n cantidad de veces las ventanas
 					
-					drop->AccessibleName = result[7];
-					drop->Name = result[2];
-					drop->Values->ExtraText = result[13];
+					drop->AccessibleName = res[7];
+					drop->Name = res[2];
+					drop->Values->ExtraText = res[13];
 
-					drop->Text = result[2]+"\n";
-					drop->Text += result[13];
+					drop->Text = res[2]+"\n";
+					drop->Text += res[13];
 
 					drop->Click += gcnew System::EventHandler(this, &Catalogo::drop_Click);
 
-					String^ tID = result[7];
-					std::string ID = msclr::interop::marshal_as<std::string>(tID);
-					String^ tArtist = result[2];
-					std::string Artist = msclr::interop::marshal_as<std::string>(tArtist);
-					String^ tSongName = result[13];
-					std::string SongName = msclr::interop::marshal_as<std::string>(tSongName);
+					String^ tID = res[7];
+					string ID = msclr::interop::marshal_as<string>(tID);
+					String^ tArtist = res[2];
+					string Artist = msclr::interop::marshal_as<string>(tArtist);
+					String^ tSongName = res[13];
+					string SongName = msclr::interop::marshal_as<string>(tSongName);
 
 					const char* cID = ID.c_str();
 					const char* cArtist = Artist.c_str();
