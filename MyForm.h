@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include "test.h"
-#include "dashboard.h"
+#include <fstream>
+#include <iostream>
+#include <string>
 using namespace System;
 System::Windows::Forms::Form;
 using namespace System::ComponentModel;
@@ -8,8 +10,7 @@ using namespace System::Collections;
 using namespace System::Windows::Forms;
 using namespace System::Data;
 using namespace ComponentFactory::Krypton::Toolkit;
-#include "SpotifyUsuario.h"
-#include "Usuario.h"
+
 
 namespace SpotifyApp {
 
@@ -478,37 +479,49 @@ namespace SpotifyApp {
 
     }
 
-    private: System::Void signInBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+    private: System::Void signInBtn_Click(System::Object^ sender, System::EventArgs^ e)
+    {
 
         bool showWindownForm = false;
-        dashboard^ dsb = gcnew dashboard();
-        SpotifyUsuario su;
-        Usuario u;
+        spotUs actual;
         //using std::string; 
-        string user = u.username;
-        string name = u.name;
-        string pass = u.password;
-        string email = u.email;
+        string user = actual.usuario;
+        string name = actual.nombre;
+        string pass = actual.contra;
+        string correo = actual.correo;
+        
         String^ _user = gcnew String(user.c_str());
         String^ _name = gcnew String(name.c_str());
         String^ _pass = gcnew String(pass.c_str());
-        String^ _email = gcnew String(email.c_str());
+        String^ _email = gcnew String(correo.c_str());
         if (usernameTxt->Text == _user && passwordTxt->Text == _pass)
         {
+            ifstream archivo_SU("empleados.bin", ios::in | ios::binary);
 
-            su.iniciarSesion();
-            dsb->Show();
+            if (!archivo_SU)
+            {
+                cout << "Error al intentar abrir el archivo empleados.bin\n";
+                return;
+            }
 
+            
+            archivo_SU.seekg(0, ios::beg);
+
+            archivo_SU.read(reinterpret_cast<char*>(&actual), sizeof(spotUs));
+            archivo_SU.close();
+            //llamar funcion dashboarde
+
+        }
+        else if (usernameTxt->Text == _user && passwordTxt->Text == _pass)
+        {
+            MessageBox::Show("Ya existe!", "Error!", MessageBoxButtons::OK);
         }
         else {
             MessageBox::Show("Datos incorrectos.", "Error!", MessageBoxButtons::OK);
         }
 
     }
-
     };
 }
 
-#pragma endregion
-	/*private: System::Void kryptonPalette2_PalettePaint(System::Object^ sender, ComponentFactory::Krypton::Toolkit::PaletteLayoutEventArgs^ e) {
-	}*/
+

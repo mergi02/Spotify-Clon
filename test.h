@@ -1,5 +1,12 @@
 ﻿#pragma once
-
+#include "MyForm.h"
+struct spotUs
+{
+	char* usuario;
+	char* nombre;
+	char* contra;
+	char* correo;
+};
 namespace SpotifyApp {
 
 	using namespace System;
@@ -10,8 +17,11 @@ namespace SpotifyApp {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace ComponentFactory::Krypton::Toolkit;
-#include "SpotifyUsuario.h"
-#include "Usuario.h"
+
+#include <fstream>
+#include <iostream>
+#include <string>
+	using namespace std;
 	/// <summary>
 	/// Summary for test
 	/// </summary>
@@ -357,13 +367,14 @@ namespace SpotifyApp {
 
 	}
 	private: System::Void signUpBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-		SpotifyUsuario su;
-		Usuario u;
 		//using std::string; 
-		string user = u.username;
-		string name = u.name;
-		string pass = u.password;
-		string email = u.email;
+		spotUs ss;
+	
+		string user = ss.usuario;
+		string name = ss.nombre;
+		string pass = ss.contra;
+		string email = ss.correo;
+		
 		String^ _user = gcnew String(user.c_str());
 		String^ _name = gcnew String(name.c_str());
 		String^ _pass = gcnew String(pass.c_str());
@@ -371,7 +382,21 @@ namespace SpotifyApp {
 		if (userTxt->Text != _user && passTxt->Text != _pass  
 			&& nameTxt->Text != _name && emailTxt->Text != _email)
 		{
-			su.crearUsuario();
+			ofstream archivo_SU("UsuarioSpotify.bin", ios::out | ios::app | ios::binary);
+
+			if (!archivo_SU)
+			{
+				cout << "Error al intentar abrir el archivo empleados.bin\n";
+				return;
+			}
+			
+			ss.usuario;
+			ss.nombre;
+			ss.contra;
+			ss.correo;
+			archivo_SU.write(reinterpret_cast<const char*>(&ss), sizeof(spotUs));
+			archivo_SU.close();
+			
 			MyForm^ mf = gcnew MyForm();
 			mf->Show();
 		}
