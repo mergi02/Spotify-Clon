@@ -12,9 +12,8 @@ Nodo::Nodo(void){
 	songName[0] = '/0';
 
 	siguiente = nullptr;
-	anterior = nullptr;
 }
-Nodo::Nodo(const char* _ID, const char*  _art, const char* _song, Nodo* _sig, Nodo* _ant){
+Nodo::Nodo(const char* _ID, const char*  _art, const char* _song, Nodo* _sig){
 	ID = new char[strlen(_ID) + 1];
 	strcpy_s(ID, strlen(_ID) + 1, _ID);
 
@@ -25,7 +24,6 @@ Nodo::Nodo(const char* _ID, const char*  _art, const char* _song, Nodo* _sig, No
 	strcpy_s(songName, strlen(_song)+1, _song);
 
 	siguiente = _sig;
-	anterior = _ant;
 }
 
 void Nodo::setID( char* id)
@@ -66,16 +64,6 @@ void Nodo::setSiguiente(Nodo* sig)
 Nodo* Nodo::getSiguiente()
 {
 	return siguiente;
-}
-
-void Nodo::setAnterior(Nodo* ant)
-{
-	anterior = ant;
-}
-
-Nodo* Nodo::getAnterior()
-{
-	return anterior;
 }
 
 

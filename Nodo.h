@@ -6,14 +6,14 @@
 class Nodo
 {
 private:
-	Nodo* anterior, * siguiente;
+	Nodo * siguiente;
 	char* ID;
 	char* artist; 
 	char* songName;
 
 public:
 	Nodo(void);
-	Nodo(const  char*, const char*, const char*, Nodo*, Nodo*);
+	Nodo(const  char*, const char*, const char*,  Nodo*);
 
 	void setID(char*);
 	const char* getID();
@@ -27,8 +27,6 @@ public:
 	void setSiguiente(Nodo*);
 	Nodo* getSiguiente();
 
-	void setAnterior(Nodo*);
-	Nodo* getAnterior();
 
 
 };

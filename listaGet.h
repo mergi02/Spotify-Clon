@@ -7,17 +7,17 @@ using std::string;
 {
 public:
 	ListaGet();
-	void setID(string);
-	void setArtist(string);
-	void setSong(string);
+	void setID(char[]);
+	void setArtist(char[]);
+	void setSong(char[]);
 
-	 string getID();
-	 string getArtist();
-	 string getSong();
+	 char* getID();
+	 char* getArtist();
+	 char* getSong();
 private:
-	string ID;
-	string Artist;
-	string Song;
+	char ID[22];
+	char Artist[50];
+	char Song[50];
 	 
 };
 #endif //!LISTAGET_J

@@ -1,35 +1,35 @@
 #include "listaGet.h"
 
-ListaGet::ListaGet(): ID(""),Artist(""),Song("")
+ListaGet::ListaGet(): ID("ND"),Artist("ND"),Song("ND")
 {
 }
 
-void ListaGet::setID(string d)
+void ListaGet::setID(char _d[])
 {
-	ID = d;
+	strcpy_s(ID, strlen(_d)+1, _d);
 }
 
-void ListaGet::setArtist(string a)
+void ListaGet::setArtist(char a[])
 {
-	Artist = a;
+	strcpy_s(Artist, strlen(a) + 1, a);
 }
 
-void ListaGet::setSong(string s)
+void ListaGet::setSong(char s[])
 {
-	Song = s;
+	strcpy_s(Artist, strlen(s) + 1, s);
 }
 
-string ListaGet::getID()
+char* ListaGet::getID()
 {
 	return ID;
 }
 
-string ListaGet::getArtist()
+char* ListaGet::getArtist()
 {
 	return Artist;
 }
 
-string ListaGet::getSong()
+char* ListaGet::getSong()
 {
 	return Song;
 }

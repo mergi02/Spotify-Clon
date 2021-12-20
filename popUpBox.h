@@ -1,6 +1,5 @@
 #pragma once
-#include "ListasRepro.h"
-
+//#include "Catalogo.h"
 namespace SpotifyApp {
 
 	using namespace System;
@@ -28,7 +27,6 @@ namespace SpotifyApp {
 		}popUpBox(bool show)
 		{
 			InitializeComponent();
-			salvarShowing = show;
 		}
 
 	protected:
@@ -44,13 +42,9 @@ namespace SpotifyApp {
 		}
 	public: ComponentFactory::Krypton::Toolkit::KryptonTextBox^ nombreLista;
 	public:
-		String^ listNamed; bool aceptarClicked = false;
-		void setListName(String^ list) {
-			listNamed = list;
-		}
-		String^ getListName() {
-			return listNamed;
-		}
+
+		//Catalogo^ ct = gcnew Catalogo;
+		//static const char* listaa = ct->lista;
 	protected:
 
 	protected:
@@ -195,12 +189,7 @@ namespace SpotifyApp {
 		}
 #pragma endregion
 	public: System::Void aceptarBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-		aceptarClicked = true;
-		MessageBox::Show("Nombre de lista: " + nombreLista->Text, "Agregado!", MessageBoxButtons::OK);
-
-		this->Visible=false;
-		this->Hide();
-		
+	
 		
 
 	}
@@ -209,13 +198,8 @@ namespace SpotifyApp {
 		this->Hide(); 
 	}
 	private: System::Void popUpBox_Load(System::Object^ sender, System::EventArgs^ e) {
-	/*	ListasRepro^ lista = gcnew ListasRepro;
-		
-		if (lista->salvarShow)
-		{
-			MessageBox::Show("Permitido " + listName, "Agregado!", MessageBoxButtons::OK);
 
-		}*/
+		
 	}
 private: System::Void nombreLista_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 

@@ -1,23 +1,5 @@
 #pragma once
-#include "SeccionButtonLista.h"
-#include "structLista.h"
-#include <iostream>
-#include <stdlib.h>
-#include <string>
-#include <vector>
-#include <sstream>
-#include "ListasRepro.h"
-#include "listaGetValues.h"
-#include "listaGet.h"
-#include  <msclr/marshal_cppstd.h>
-#include "CatalogoCircular.h"
-#include <fstream>
-#include <sstream>
-#include <vector>
-using std::ofstream;
-using std::ifstream;
-using std::ios;
-using std::cin;
+
 #include "SeccionButtonLista.h"
 #include "structLista.h"
 #include "ListaSimpleWin.h"
@@ -41,7 +23,10 @@ using namespace System::Collections;
 using namespace System::Windows::Forms;
 using namespace System::Data;
 using namespace System::Drawing;
-
+using std::ofstream;
+using std::ifstream;
+using std::ios;
+using std::cin;
 //using namespace System::ComponentModel::ComponentResourceManager^ resources;
 
 //vector<KryptonDropButton^>  button;
@@ -456,46 +441,29 @@ namespace SpotifyApp {
 		addBtn->Visible = false; numBtn2->Visible = false; lblNum->Visible = false;
 		flow->Visible = true;
 
+		
+			SeccionButtonLista btnLista;
 
 			System::String^ text = numBtn2->Text;
 			std::string newS = msclr::interop::marshal_as<std::string>(text);
 			int num = stoi(newS);
 
-		
-			SeccionButtonLista btnLista;
-			ifstream archivoData("data.csv", ios::in);
-			std::string DataStr;
-			int count = 0;
 
-			//List<String^>^ result = gcnew  List<String^>();
-			array<String^>^ res;
-			array<String^>^ arts;
-			array<String^>^ sng;
-			String^ aux;
-			String^ danceability;
-			String^ loudness;
-			String^ liveness;
-			String^ artists;
-			String^ tID;
-			String^ tArtist;
-			String^ tSongName;
+			StreamReader^ DataIn = File::OpenText("C:/Users/Administrator/source/repos/Spotify/SpotifyApp/Resources/data.txt");
+			String^ DataStr;
+			int count = 0;
+			array<String^>^ result;
+			
 			for (int i = 0; i < num; i++)
 			{
-				while (getline(archivoData, DataStr) && count != i + 1) {
-					//getline(archivoData, DataStr);
-					//std::stringstream input(DataStr);
+
+				while ((DataStr = DataIn->ReadLine()) != nullptr && count != num+1)
+				{
 					count++;
 					if (count == 1)
 						break;
 					else
-						aux = gcnew String(DataStr.c_str());
-					res = aux->Split(',');
-					arts = aux->Split('[', ']');
-					sng = aux->Split(',');
-
-					//	arts = aux->Split(']');
-
-
+						result = DataStr->Split(',');
 
 					ComponentFactory::Krypton::Toolkit::KryptonDropButton^ drop = (gcnew ComponentFactory::Krypton::Toolkit::KryptonDropButton());
 
@@ -506,7 +474,7 @@ namespace SpotifyApp {
 					// strip
 					this->strip->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 					this->strip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->reproducirToolStripMenuItem });
-					this->strip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->listasReproToolStripMenuItem});
+					this->strip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->listasReproToolStripMenuItem }); 
 					this->strip->Name = L"strip";
 					this->strip->Size = System::Drawing::Size(181, 48);
 					// reproducirToolStripMenuItem
@@ -515,15 +483,16 @@ namespace SpotifyApp {
 					this->reproducirToolStripMenuItem->Text = L"Reproducir";
 					this->reproducirToolStripMenuItem->Click += gcnew System::EventHandler(this, &Catalogo::reproducirToolStripMenuItem_Click);
 					// 
+					// listasReproToolStripMenuItem
 					this->listasReproToolStripMenuItem->Name = L"listasReproToolStripMenuItem";
 					this->listasReproToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 					this->listasReproToolStripMenuItem->Text = L"Agregar a Listas de Reproduccion";
 					this->listasReproToolStripMenuItem->Click += gcnew System::EventHandler(this, &Catalogo::listasReproToolStripMenuItem_Click);
-
+					// 
 					drop->Images->Common = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"ran.Images.Common")));
 					drop->Location = System::Drawing::Point(2, 3);
 					drop->Margin = System::Windows::Forms::Padding(2, 3, 2, 3);
-					drop->Name = L"songBtn";
+					drop->Name = L"drop";
 					drop->Size = System::Drawing::Size(671, 71);
 					drop->StateCommon->Back->Color1 = System::Drawing::Color::Lime;
 					drop->StateCommon->Back->Color2 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
@@ -548,71 +517,24 @@ namespace SpotifyApp {
 					drop->Values->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"ran.Values.Image")));
 					drop->Values->Text = L"testButton";
 
-
-
+					//MessageBox::Show(test, "Error", MessageBoxButtons::OK);
+				
+					//bug: se abre la info de un elemento anterior y se abre n cantidad de veces las ventanas
 					
-					drop->Name = arts[1];
-					drop->Text = arts[1] + "\n";
-					tArtist = arts[1];
-					if (res->Length == 20)
-					{
-						drop->Text += sng[13];
-						drop->Values->ExtraText = sng[13];
-						tSongName = sng[13];
-						drop->AccessibleName = sng[7];
-						tID = sng[7];
+					drop->AccessibleName = result[7];
+					drop->Name = result[2];
+					drop->Values->ExtraText = result[13];
 
-					}
-					else if (res->Length == 21)
-					{
-						drop->Text += sng[14];
-						drop->Values->ExtraText = sng[14];
-						tSongName = sng[14];
-						drop->AccessibleName = sng[7];
-						tID = sng[7];
+					drop->Text = result[2]+"\n";
+					drop->Text += result[13];
 
-					}
-					else if (res->Length == 22)
-					{
-						drop->Text += sng[15];
-						drop->Values->ExtraText = sng[15];
-						drop->AccessibleName = sng[8];
-						tSongName = sng[15];
-						tID = sng[8];
-
-					}
-					else if (res->Length == 23)
-					{
-						drop->Text += sng[16];
-						drop->Values->ExtraText = sng[16];
-						tSongName = sng[16];
-						drop->AccessibleName = sng[9];
-						tID = sng[9];
-
-					}
-					 if (res->Length == 24)
-					{
-						drop->Text += sng[17];
-						drop->Values->ExtraText = sng[17];
-						tSongName = sng[17];
-						drop->AccessibleName = sng[10];
-
-						tID = sng[10];
-
-					}
-					else if (res->Length == 25)
-					{
-						drop->Text += sng[18];
-						tSongName = sng[18];
-						drop->Values->ExtraText = sng[18];
-						drop->AccessibleName = sng[10];
-						tID = sng[10];
-					}
 					drop->Click += gcnew System::EventHandler(this, &Catalogo::drop_Click);
 
-					
+					String^ tID = result[7];
 					std::string ID = msclr::interop::marshal_as<std::string>(tID);
+					String^ tArtist = result[2];
 					std::string Artist = msclr::interop::marshal_as<std::string>(tArtist);
+					String^ tSongName = result[13];
 					std::string SongName = msclr::interop::marshal_as<std::string>(tSongName);
 
 					const char* cID = ID.c_str();
@@ -672,9 +594,9 @@ private: System::Void reproducirToolStripMenuItem_Click(System::Object^ sender, 
 			const char* cSongName = SongName.c_str();
 			const char* cNombreLista = nombreLista.c_str();
 			String^ url = gcnew String(cID);
-			MessageBox::Show(url, "Exito!", MessageBoxButtons::OK);
-
 			ListasRepro^ ls = gcnew ListasRepro;
+
+			MessageBox::Show("URL", url, MessageBoxButtons::OK);
 			ls->agregar(cNombreLista,cID, cArtist, cSongName);
 	        
 
@@ -690,6 +612,17 @@ private: System::Void reproducirToolStripMenuItem_Click(System::Object^ sender, 
 			String^ artt = gcnew String(art.c_str());
 			String^ cann = gcnew String(can.c_str());
 
+			////agg info de lista
+			////nombre lista
+			//strcpy_s(info.nombreLista, strlen(cNombreLista) + 1, cNombreLista);
+
+			////hora y fecha
+			//const auto now = std::chrono::system_clock::now();
+			//time_t tm = time(NULL);
+			//struct tm* curtime = localtime(&tm);
+			//strcpy_s(info.fechaHoraCreacion, strlen(asctime(curtime)) + 1, asctime(curtime));
+			//string hora = info.fechaHoraCreacion;
+			//String^ horaa = gcnew String(hora.c_str());
 			repro++;
 
 		if(repro>0){
@@ -706,7 +639,15 @@ private: System::Void reproducirToolStripMenuItem_Click(System::Object^ sender, 
 
 
 	private: System::Void listasReproToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		
+	/*	
+		StreamReader^ DataIn = File::OpenText("ListaBotones.txt");
+		String^ DataStr;
+		int count = 0;
+		array<String^>^ result;*/
+	
 
+		
 		
 
 		if (repro==0)
@@ -772,6 +713,9 @@ private: System::Void reproducirToolStripMenuItem_Click(System::Object^ sender, 
 		
 			
 		flowListas->AutoScroll = true;
+		//btnLista.add(drop, cID, cArtist, cSongName);
+		//flow->Controls->Add(drop);
+
 
 
 }

@@ -521,7 +521,7 @@ private: System::Void signUpBtn_Click(System::Object^ sender, System::EventArgs^
             {
                 users = gcnew String(ss.usuario);
                 this->Hide();
-                dashboard^ sgn = gcnew dashboard;
+                dashboard^ sgn = gcnew dashboard(usernameTxt->Text);
                 sgn->Show();
             }
             else {

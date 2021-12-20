@@ -1,63 +1,68 @@
 #pragma once
+#include "MyForm.h"
 #include "Catalogo.h"
 #include "ListasRepro.h"
+#include "descubrir.h"
+#include "reproducir.h"
+
 namespace SpotifyApp {
-	using namespace System;
-	using System::Windows::Forms::Form;
-	using namespace System::ComponentModel;
-	using namespace System::Collections;
-	using namespace System::Windows::Forms;
-	using namespace System::Data;
-	using namespace System::Drawing;
-	using namespace ComponentFactory::Krypton::Toolkit;
+    using namespace System;
+    using System::Windows::Forms::Form;
+    using namespace System::ComponentModel;
+    using namespace System::Collections;
+    using namespace System::Windows::Forms;
+    using namespace System::Data;
+    using namespace System::Drawing;
+    using namespace ComponentFactory::Krypton::Toolkit;
 
-	/// <summary>
-	/// Summary for dashboard
-	/// </summary>
-	public ref class dashboard : public KryptonForm
-	{
-	public:
-		dashboard(void)
-		{
-			InitializeComponent();/*
-            pnlNav->Height = dsbBtn->Height;
-            pnlNav->Top = dsbBtn->Top;
-            pnlNav->Left = dsbBtn->Left;*/
-
-		}
-        dashboard(bool _open)
+    /// <summary>
+    /// Summary for dashboard
+    /// </summary>
+    public ref class dashboard : public KryptonForm
+    {
+    public:
+        dashboard(void)
         {
             InitializeComponent();
+       
+
+
         }
-	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		~dashboard()
-		{
-			if (components)
-			{
-				delete components;
-			}
-		}
-	private: System::Windows::Forms::Panel^ pnlNav;
-	protected:
+        dashboard(String^ txt)
+        {
+            InitializeComponent();
+            username->Text = txt;
+        }
+    protected:
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        ~dashboard()
+        {
+            if (components)
+            {
+                delete components;
+            }
+        }
+    private: System::Windows::Forms::Panel^ pnlNav;
+    protected:
 
-	protected:
+    protected:
 
-	protected:
-	private: System::Windows::Forms::Panel^ panel1;
-	private: System::Windows::Forms::PictureBox^ pictureBox1;
-	private: System::Windows::Forms::Panel^ panel3;
-
-
+    protected:
+    private: System::Windows::Forms::Panel^ panel1;
+    private: System::Windows::Forms::PictureBox^ pictureBox1;
+    private: System::Windows::Forms::Panel^ panel3;
 
 
 
-	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::Label^ label1;
-	private: ComponentFactory::Krypton::Toolkit::KryptonPalette^ kryptonPalette1;
-	private: ComponentFactory::Krypton::Toolkit::KryptonButton^ dsbBtn;
+
+
+    private: System::Windows::Forms::Label^ label2;
+    private: System::Windows::Forms::Label^ username;
+
+    private: ComponentFactory::Krypton::Toolkit::KryptonPalette^ kryptonPalette1;
+    private: ComponentFactory::Krypton::Toolkit::KryptonButton^ dsbBtn;
     private: ComponentFactory::Krypton::Toolkit::KryptonButton^ cerrarBtn;
 
 
@@ -76,21 +81,21 @@ namespace SpotifyApp {
 
 
 
-	private: System::ComponentModel::IContainer^ components;
+    private: System::ComponentModel::IContainer^ components;
 
-	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
+    private:
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
 
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		void InitializeComponent(void)
-		{
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        void InitializeComponent(void)
+        {
             this->components = (gcnew System::ComponentModel::Container());
             System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(dashboard::typeid));
             this->pnlNav = (gcnew System::Windows::Forms::Panel());
@@ -101,7 +106,7 @@ namespace SpotifyApp {
             this->dsbBtn = (gcnew ComponentFactory::Krypton::Toolkit::KryptonButton());
             this->panel3 = (gcnew System::Windows::Forms::Panel());
             this->label2 = (gcnew System::Windows::Forms::Label());
-            this->label1 = (gcnew System::Windows::Forms::Label());
+            this->username = (gcnew System::Windows::Forms::Label());
             this->panel1 = (gcnew System::Windows::Forms::Panel());
             this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
             this->kryptonPalette1 = (gcnew ComponentFactory::Krypton::Toolkit::KryptonPalette(this->components));
@@ -126,7 +131,7 @@ namespace SpotifyApp {
             this->pnlNav->Controls->Add(this->dsbBtn);
             this->pnlNav->Controls->Add(this->panel3);
             this->pnlNav->Controls->Add(this->label2);
-            this->pnlNav->Controls->Add(this->label1);
+            this->pnlNav->Controls->Add(this->username);
             this->pnlNav->Controls->Add(this->panel1);
             this->pnlNav->Dock = System::Windows::Forms::DockStyle::Left;
             this->pnlNav->Location = System::Drawing::Point(0, 0);
@@ -215,9 +220,9 @@ namespace SpotifyApp {
                 static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
             this->descuBtn->StateCommon->Back->ImageStyle = ComponentFactory::Krypton::Toolkit::PaletteImageStyle::CenterRight;
             this->descuBtn->StateCommon->Border->Color1 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
-                static_cast<System::Int32>(static_cast<System::Byte>(111)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
+                static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
             this->descuBtn->StateCommon->Border->Color2 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
-                static_cast<System::Int32>(static_cast<System::Byte>(111)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
+                static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
             this->descuBtn->StateCommon->Border->DrawBorders = static_cast<ComponentFactory::Krypton::Toolkit::PaletteDrawBorders>((((ComponentFactory::Krypton::Toolkit::PaletteDrawBorders::Top | ComponentFactory::Krypton::Toolkit::PaletteDrawBorders::Bottom)
                 | ComponentFactory::Krypton::Toolkit::PaletteDrawBorders::Left)
                 | ComponentFactory::Krypton::Toolkit::PaletteDrawBorders::Right));
@@ -281,9 +286,9 @@ namespace SpotifyApp {
                 static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
             this->reproBtn->StateCommon->Back->ImageStyle = ComponentFactory::Krypton::Toolkit::PaletteImageStyle::CenterRight;
             this->reproBtn->StateCommon->Border->Color1 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
-                static_cast<System::Int32>(static_cast<System::Byte>(111)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
+                static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
             this->reproBtn->StateCommon->Border->Color2 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
-                static_cast<System::Int32>(static_cast<System::Byte>(111)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
+                static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
             this->reproBtn->StateCommon->Border->DrawBorders = static_cast<ComponentFactory::Krypton::Toolkit::PaletteDrawBorders>((((ComponentFactory::Krypton::Toolkit::PaletteDrawBorders::Top | ComponentFactory::Krypton::Toolkit::PaletteDrawBorders::Bottom)
                 | ComponentFactory::Krypton::Toolkit::PaletteDrawBorders::Left)
                 | ComponentFactory::Krypton::Toolkit::PaletteDrawBorders::Right));
@@ -346,9 +351,9 @@ namespace SpotifyApp {
                 static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
             this->listasReproBtn->StateCommon->Back->ImageStyle = ComponentFactory::Krypton::Toolkit::PaletteImageStyle::CenterRight;
             this->listasReproBtn->StateCommon->Border->Color1 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
-                static_cast<System::Int32>(static_cast<System::Byte>(111)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
+                static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
             this->listasReproBtn->StateCommon->Border->Color2 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
-                static_cast<System::Int32>(static_cast<System::Byte>(111)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
+                static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
             this->listasReproBtn->StateCommon->Border->DrawBorders = static_cast<ComponentFactory::Krypton::Toolkit::PaletteDrawBorders>((((ComponentFactory::Krypton::Toolkit::PaletteDrawBorders::Top | ComponentFactory::Krypton::Toolkit::PaletteDrawBorders::Bottom)
                 | ComponentFactory::Krypton::Toolkit::PaletteDrawBorders::Left)
                 | ComponentFactory::Krypton::Toolkit::PaletteDrawBorders::Right));
@@ -411,9 +416,9 @@ namespace SpotifyApp {
                 static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
             this->dsbBtn->StateCommon->Back->ImageStyle = ComponentFactory::Krypton::Toolkit::PaletteImageStyle::CenterRight;
             this->dsbBtn->StateCommon->Border->Color1 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
-                static_cast<System::Int32>(static_cast<System::Byte>(111)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
+                static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
             this->dsbBtn->StateCommon->Border->Color2 = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
-                static_cast<System::Int32>(static_cast<System::Byte>(111)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
+                static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
             this->dsbBtn->StateCommon->Border->DrawBorders = static_cast<ComponentFactory::Krypton::Toolkit::PaletteDrawBorders>((((ComponentFactory::Krypton::Toolkit::PaletteDrawBorders::Top | ComponentFactory::Krypton::Toolkit::PaletteDrawBorders::Bottom)
                 | ComponentFactory::Krypton::Toolkit::PaletteDrawBorders::Left)
                 | ComponentFactory::Krypton::Toolkit::PaletteDrawBorders::Right));
@@ -483,19 +488,19 @@ namespace SpotifyApp {
             this->label2->Text = L"your library.";
             this->label2->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
             // 
-            // label1
+            // username
             // 
-            this->label1->AutoSize = true;
-            this->label1->Font = (gcnew System::Drawing::Font(L"Century Gothic", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+            this->username->AutoSize = true;
+            this->username->Font = (gcnew System::Drawing::Font(L"Century Gothic", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
-            this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(176)), static_cast<System::Int32>(static_cast<System::Byte>(209)),
+            this->username->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(176)), static_cast<System::Int32>(static_cast<System::Byte>(209)),
                 static_cast<System::Int32>(static_cast<System::Byte>(178)));
-            this->label1->Location = System::Drawing::Point(58, 147);
-            this->label1->Name = L"label1";
-            this->label1->Size = System::Drawing::Size(72, 16);
-            this->label1->TabIndex = 3;
-            this->label1->Text = L"Username";
-            this->label1->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+            this->username->Location = System::Drawing::Point(58, 147);
+            this->username->Name = L"username";
+            this->username->Size = System::Drawing::Size(72, 16);
+            this->username->TabIndex = 3;
+            this->username->Text = L"Username";
+            this->username->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
             // 
             // panel1
             // 
@@ -583,101 +588,99 @@ namespace SpotifyApp {
 
         }
 #pragma endregion
-  
 
 
-	private: System::Void dsbBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-		
 
-       // tltDashLbl->Text = "Catalogo";
-		//pnlNav->Height = dsbBtn->Height;
-		//pnlNav->Top = dsbBtn->Top;
-		//pnlNav->Left = dsbBtn->Left;
+    private: System::Void dsbBtn_Click(System::Object^ sender, System::EventArgs^ e) {
 
-       // this->pnlFormLoader->Controls->Clear(); 
 
         Catalogo^ us = gcnew Catalogo();
         this->pnlFormLoader->Controls->Add(us);
         us->BringToFront();
         us->Show();
-   
-        // = "C:/Users/Administrator/source/repos/Spotify/SpotifyApp/Resources/data.csv";
-    }   
+
+      
+      
+      
+    }
 
 
-private: System::Void listasReproBtn_Click1(System::Object^ sender, System::EventArgs^ e) {
-	pnlNav->Height = listasReproBtn->Height;
-	pnlNav->Top = listasReproBtn->Top;
-	pnlNav->Left = listasReproBtn->Left;
-
-  
-
-}
-private: System::Void reproBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-	pnlNav->Height = reproBtn->Height;
-	pnlNav->Top = reproBtn->Top;
-	pnlNav->Left = reproBtn->Left;
-   
-}
-private: System::Void descuBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-	pnlNav->Height = descuBtn->Height;
-	pnlNav->Top = descuBtn->Top;
-	pnlNav->Left = descuBtn->Left;
-
-   
-
-    ListasRepro^ rp = gcnew ListasRepro();
-    this->pnlFormLoader->Controls->Add(rp);
-    rp->BringToFront();
-    rp->Show();
-}
-public: System::Void cerrarBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-    Application::Restart();
-    
-}
-private: System::Void userControl1_Load(System::Object^ sender, System::EventArgs^ e) {
- /*   MyUserControl^ us = gcnew MyUserControl();
-    this->pnlFormLoader->Controls->Add(us);
-    us->Show();*/
-
-}
-private: System::Void dashboard_Load(System::Object^ sender, System::EventArgs^ e) {
-}
-
-private: System::Void listasReproBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-   // tltDashLbl->Text = "Listas de Reproduccion";
-
-    ListasRepro^ rp = gcnew ListasRepro();
-    this->pnlFormLoader->Controls->Add(rp);
-    rp->BringToFront();
-    rp->Show();
-    this->pnlNav->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(34)), static_cast<System::Int32>(static_cast<System::Byte>(50)),
-        static_cast<System::Int32>(static_cast<System::Byte>(96)));
+    private: System::Void listasReproBtn_Click1(System::Object^ sender, System::EventArgs^ e) {
+        pnlNav->Height = listasReproBtn->Height;
+        pnlNav->Top = listasReproBtn->Top;
+        pnlNav->Left = listasReproBtn->Left;
 
 
-}
-private: System::Void reproBtn_Click_1(System::Object^ sender, System::EventArgs^ e) {
-   // tltDashLbl->Text = "Reproducir";
 
-    ListasRepro^ rp = gcnew ListasRepro();
-    this->pnlFormLoader->Controls->Add(rp);
-    rp->BringToFront();
-    rp->Show();
-}
-private: System::Void descuBtn_Click_1(System::Object^ sender, System::EventArgs^ e) {
-  //  tltDashLbl->Text = "Descubrir tu estado de animo";
+    }
+    private: System::Void reproBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+        pnlNav->Height = reproBtn->Height;
+        pnlNav->Top = reproBtn->Top;
+        pnlNav->Left = reproBtn->Left;
 
-    ListasRepro^ rp = gcnew ListasRepro();
-    this->pnlFormLoader->Controls->Add(rp);
-    rp->BringToFront();
-    rp->Show();
+    }
+    private: System::Void descuBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+        pnlNav->Height = descuBtn->Height;
+        pnlNav->Top = descuBtn->Top;
+        pnlNav->Left = descuBtn->Left;
 
-}
-private: System::Void contextMenuStrip1_Opening(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e) {
-}
-private: System::Void reproducirToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void kryptonDropButton1_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-};
+
+
+        descubrir^ rp = gcnew descubrir();
+        this->pnlFormLoader->Controls->Add(rp);
+        rp->BringToFront();
+        rp->Show();
+    }
+    public: System::Void cerrarBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+        Application::Restart();
+
+    }
+    private: System::Void userControl1_Load(System::Object^ sender, System::EventArgs^ e) {
+        /*   MyUserControl^ us = gcnew MyUserControl();
+           this->pnlFormLoader->Controls->Add(us);
+           us->Show();*/
+
+    }
+    private: System::Void dashboard_Load(System::Object^ sender, System::EventArgs^ e) {
+    }
+
+    private: System::Void listasReproBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+        // tltDashLbl->Text = "Listas de Reproduccion";
+
+        ListasRepro^ rp = gcnew ListasRepro(username->Text);
+        this->pnlFormLoader->Controls->Add(rp);
+        rp->BringToFront();
+        rp->Show();
+        this->pnlNav->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(34)), static_cast<System::Int32>(static_cast<System::Byte>(50)),
+            static_cast<System::Int32>(static_cast<System::Byte>(96)));
+
+
+    }
+    private: System::Void reproBtn_Click_1(System::Object^ sender, System::EventArgs^ e) {
+        // tltDashLbl->Text = "Reproducir";
+
+        reproducir^ rp = gcnew reproducir();
+        this->pnlFormLoader->Controls->Add(rp);
+        rp->BringToFront();
+        rp->Show();
+
+        this->pnlNav->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(34)), static_cast<System::Int32>(static_cast<System::Byte>(50)),
+            static_cast<System::Int32>(static_cast<System::Byte>(96)));
+    }
+    private: System::Void descuBtn_Click_1(System::Object^ sender, System::EventArgs^ e) {
+        //  tltDashLbl->Text = "Descubrir tu estado de animo";
+
+        descubrir^ rp = gcnew descubrir();
+        this->pnlFormLoader->Controls->Add(rp);
+        rp->BringToFront();
+        rp->Show();
+
+    }
+    private: System::Void contextMenuStrip1_Opening(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e) {
+    }
+    private: System::Void reproducirToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+    }
+    private: System::Void kryptonDropButton1_Click(System::Object^ sender, System::EventArgs^ e) {
+    }
+    };
 }
