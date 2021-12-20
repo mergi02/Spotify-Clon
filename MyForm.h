@@ -1,8 +1,7 @@
 ﻿#pragma once
 #include "test.h"
-#include <fstream>
-#include <iostream>
-#include <string>
+#include "dashboard.h"
+#include "structLista.h"
 using namespace System;
 System::Windows::Forms::Form;
 using namespace System::ComponentModel;
@@ -12,40 +11,42 @@ using namespace System::Data;
 using namespace ComponentFactory::Krypton::Toolkit;
 
 
+
+
 namespace SpotifyApp {
 
-    /// <summary>
-    /// Summary for MyForm
-    /// </summary>
-    public ref class MyForm : public KryptonForm
-    {
+	/// <summary>
+	/// Summary for MyForm
+	/// </summary>
+	public ref class MyForm : public KryptonForm
+	{
+    
+	public:
+		MyForm(void)
+		{
+			InitializeComponent();
+		}
 
-    public:
-        MyForm(void)
-        {
-            InitializeComponent();
-        }
 
-
-    protected:
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        ~MyForm()
-        {
-            if (components)
-            {
-                delete components;
-            }
-        }
-    private: ComponentFactory::Krypton::Toolkit::KryptonPalette^ kryptonPalette1;
-    private: System::Windows::Forms::Label^ label1;
-    private: System::Windows::Forms::Label^ label2;
+	protected:
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		~MyForm()
+		{
+			if (components)
+			{
+				delete components;
+			}
+		}
+	private: ComponentFactory::Krypton::Toolkit::KryptonPalette^ kryptonPalette1;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ label2;
     private: ComponentFactory::Krypton::Toolkit::KryptonTextBox^ usernameTxt;
     private: ComponentFactory::Krypton::Toolkit::KryptonTextBox^ passwordTxt;
 
 
-    private: System::Windows::Forms::Label^ label3;
+	private: System::Windows::Forms::Label^ label3;
     private: ComponentFactory::Krypton::Toolkit::KryptonButton^ signInBtn;
 
     private: ComponentFactory::Krypton::Toolkit::KryptonButton^ signUpBtn;
@@ -59,22 +60,22 @@ namespace SpotifyApp {
     protected:
 
 
-    protected:
-    private: System::ComponentModel::IContainer^ components;
+	protected:
+	private: System::ComponentModel::IContainer^ components;
 
-    private:
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
+	private:
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
 
 
 #pragma region Windows Form Designer generated code
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        void InitializeComponent(void)
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		void InitializeComponent(void)
+		{
             this->components = (gcnew System::ComponentModel::Container());
             System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
             this->kryptonPalette1 = (gcnew ComponentFactory::Krypton::Toolkit::KryptonPalette(this->components));
@@ -465,63 +466,91 @@ namespace SpotifyApp {
         }
     private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
     }
-    private: System::Void kryptonTextBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+private: System::Void kryptonTextBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+   
+}
+private: System::Void kryptonPalette1_PalettePaint(System::Object^ sender, ComponentFactory::Krypton::Toolkit::PaletteLayoutEventArgs^ e) {
+}
+private: System::Void signUpBtn_Click(System::Object^ sender, System::EventArgs^ e) {
+//    this->Hide();
+//    test^ sgn= gcnew test;
+//    sgn->Show();
+//  
+    test^ sgn = gcnew test;
+    sgn->Tag = this;
+    sgn->Show(this);
+    Hide();
 
-    }
-    private: System::Void kryptonPalette1_PalettePaint(System::Object^ sender, ComponentFactory::Krypton::Toolkit::PaletteLayoutEventArgs^ e) {
-    }
-    private: System::Void signUpBtn_Click(System::Object^ sender, System::EventArgs^ e) {
-        this->Hide();
-        test^ sgn = gcnew test;
-        sgn->Show();
+}
+          public:
+              static String^ users;
 
-
-
-    }
 
     private: System::Void signInBtn_Click(System::Object^ sender, System::EventArgs^ e)
     {
 
         bool showWindownForm = false;
-        spotUs actual;
-        //using std::string; 
-        string user = actual.usuario;
-        string name = actual.nombre;
-        string pass = actual.contra;
-        string correo = actual.correo;
-        
-        String^ _user = gcnew String(user.c_str());
-        String^ _name = gcnew String(name.c_str());
-        String^ _pass = gcnew String(pass.c_str());
-        String^ _email = gcnew String(correo.c_str());
-        if (usernameTxt->Text == _user && passwordTxt->Text == _pass)
-        {
-            ifstream archivo_SU("empleados.bin", ios::in | ios::binary);
 
-            if (!archivo_SU)
+
+        System::String^ text = usernameTxt->Text;
+        std::string user = msclr::interop::marshal_as<std::string>(text);
+
+
+        ifstream archivo_SU("spotifyUsers.bin", ios::in | ios::binary);
+        spotUs ss;
+
+        if (!archivo_SU)
+        {
+            return;
+        }
+        bool error = false;
+        String^ usuario;
+        String^ pass;
+
+ 
+        archivo_SU.seekg(0, ios::beg);
+        archivo_SU.read(reinterpret_cast<char*> (&ss), sizeof(spotUs));
+
+        while (!archivo_SU.eof())
+        {
+
+             usuario = gcnew String(ss.usuario);
+             pass = gcnew String(ss.contra);
+
+            if (usuario == usernameTxt->Text  && pass == passwordTxt->Text)
             {
-                cout << "Error al intentar abrir el archivo empleados.bin\n";
-                return;
+                users = gcnew String(ss.usuario);
+                this->Hide();
+                dashboard^ sgn = gcnew dashboard;
+                sgn->Show();
+            }
+            else {
+
+                MessageBox::Show("Datos incorrectos.", "Error!", MessageBoxButtons::OK);
             }
 
-            
-            archivo_SU.seekg(0, ios::beg);
-
-            archivo_SU.read(reinterpret_cast<char*>(&actual), sizeof(spotUs));
-            archivo_SU.close();
-            //llamar funcion dashboarde
+            archivo_SU.read(reinterpret_cast<char*> (&ss), sizeof(spotUs));
 
         }
-        else if (usernameTxt->Text == _user && passwordTxt->Text == _pass)
-        {
-            MessageBox::Show("Ya existe!", "Error!", MessageBoxButtons::OK);
-        }
-        else {
-            MessageBox::Show("Datos incorrectos.", "Error!", MessageBoxButtons::OK);
-        }
+        archivo_SU.close();
+
+        
+
+
+        /* }
+         else if (usernameTxt->Text == _user && passwordTxt->Text == _pass)
+         {
+             MessageBox::Show("Ya existe!", "Error!", MessageBoxButtons::OK);
+         }
+         else {
+             MessageBox::Show("Datos incorrectos.", "Error!", MessageBoxButtons::OK);
+         }*/
 
     }
-    };
 }
 
-
+#pragma endregion
+	/*private: System::Void kryptonPalette2_PalettePaint(System::Object^ sender, ComponentFactory::Krypton::Toolkit::PaletteLayoutEventArgs^ e) {
+	}*/
+	;
+}

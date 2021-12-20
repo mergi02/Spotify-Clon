@@ -1,27 +1,39 @@
 ﻿#pragma once
-#include "MyForm.h"
-struct spotUs
-{
-	char* usuario;
-	char* nombre;
-	char* contra;
-	char* correo;
-};
-namespace SpotifyApp {
-
-	using namespace System;
-	System::Windows::Forms::Form;
-	using namespace System::ComponentModel;
-	using namespace System::Collections;
-	using namespace System::Windows::Forms;
-	using namespace System::Data;
-	using namespace System::Drawing;
-	using namespace ComponentFactory::Krypton::Toolkit;
-
 #include <fstream>
 #include <iostream>
 #include <string>
-	using namespace std;
+#include <iostream>
+#include <stdlib.h>
+#include <string>
+#include <vector>
+#include "structLista.h"
+#include <sstream>
+#include  <msclr/marshal_cppstd.h>
+#include <fstream>
+#include <sstream>
+#include <vector>
+using std::ofstream;
+using std::ifstream;
+using std::ios;
+using std::cin;
+using std::fstream;
+
+
+#include  <msclr/marshal_cppstd.h>
+using namespace msclr::interop;
+using std::vector; using std::cin;
+System::Windows::Forms::Form;
+using namespace System;
+using namespace System::IO;
+using namespace System::ComponentModel;
+using namespace System::Collections;
+using namespace System::Windows::Forms;
+using namespace System::Data;
+using namespace System::Drawing;
+using namespace ComponentFactory::Krypton::Toolkit;
+namespace SpotifyApp {
+
+
 	/// <summary>
 	/// Summary for test
 	/// </summary>
@@ -368,41 +380,91 @@ namespace SpotifyApp {
 	}
 	private: System::Void signUpBtn_Click(System::Object^ sender, System::EventArgs^ e) {
 		//using std::string; 
-		spotUs ss;
+	/*	MyForm^ form = (MyForm^)Application::OpenForms["MyForm"];
+		form->Show();*/
 	
-		string user = ss.usuario;
+		
+		
+		spotUs ss;
+
+		/*string user = ss.usuario;
 		string name = ss.nombre;
 		string pass = ss.contra;
-		string email = ss.correo;
-		
-		String^ _user = gcnew String(user.c_str());
-		String^ _name = gcnew String(name.c_str());
-		String^ _pass = gcnew String(pass.c_str());
-		String^ _email = gcnew String(email.c_str());
-		if (userTxt->Text != _user && passTxt->Text != _pass  
-			&& nameTxt->Text != _name && emailTxt->Text != _email)
-		{
-			ofstream archivo_SU("UsuarioSpotify.bin", ios::out | ios::app | ios::binary);
+		string email = ss.correo;*/
+	
 
-			if (!archivo_SU)
+		System::String^ text = userTxt->Text;
+		std::string newS = msclr::interop::marshal_as<std::string>(text);
+		
+		System::String^ text2 = passTxt->Text;
+		std::string pass = msclr::interop::marshal_as<std::string>(text2);
+
+		System::String^ text3 = nameTxt->Text;
+		std::string name = msclr::interop::marshal_as<std::string>(text3);
+
+		System::String^ text4 = emailTxt->Text;
+		std::string email = msclr::interop::marshal_as<std::string>(text4);
+
+		
+		
+		ifstream archivoRead("spotifyUsers.bin", ios::in | ios::binary);
+		//fstream archivo_SU("spotifyUsers.bin", ios::out | ios::in | ios::binary);
+
+
+		bool mostrarLogIn = false;
+		long posicionArchivo = 0;
+		archivoRead.seekg(0, ios::beg);
+		archivoRead.read(reinterpret_cast<char*>(&ss), sizeof(spotUs));
+
+		while (!archivoRead.eof())
+		{
+			String^ usuario = gcnew String(ss.usuario);
+		
+			if (usuario==userTxt->Text)
 			{
-				cout << "Error al intentar abrir el archivo empleados.bin\n";
-				return;
+			
+				mostrarLogIn = false;
+				
 			}
+			else {
+				mostrarLogIn = true;
+				
+			}
+			break;
+
+			archivoRead.read(reinterpret_cast<char*>(&ss), sizeof(spotUs));
 			
-			ss.usuario;
-			ss.nombre;
-			ss.contra;
-			ss.correo;
-			archivo_SU.write(reinterpret_cast<const char*>(&ss), sizeof(spotUs));
-			archivo_SU.close();
-			
-			MyForm^ mf = gcnew MyForm();
-			mf->Show();
 		}
-		else {
-			MessageBox::Show("Faltan requisitos.", "Error", MessageBoxButtons::OK);
+		archivoRead.close();
+
+		if (mostrarLogIn==false)
+		{
+			MessageBox::Show("Error", "Datos ya existen.", MessageBoxButtons::OK);
 		}
+
+		if (mostrarLogIn) {
+			String^ user;
+		ofstream archivo("spotifyUsers.bin", ios::out |ios::app| ios::binary);
+		int num = 1;
+		for (int i = 0; i < num; i++)
+		{
+
+			strcpy_s(ss.usuario, strlen(newS.c_str()) + 1, newS.c_str());
+			user = gcnew String(ss.usuario);
+			strcpy_s(ss.nombre, strlen(name.c_str()) + 1, name.c_str());
+			strcpy_s(ss.contra, strlen(pass.c_str()) + 1, pass.c_str());
+			strcpy_s(ss.correo, strlen(email.c_str()) + 1, email.c_str());
+
+			archivo.write(reinterpret_cast<const char*>(&ss), sizeof(spotUs));
+		}
+
+		archivo.close();
+		num = 0;
+		MessageBox::Show("Usuario : "+ user, "Exito!", MessageBoxButtons::OK);
+		this->Hide();
+		Application::Restart();
+		}
+
 	}
 	};
 
